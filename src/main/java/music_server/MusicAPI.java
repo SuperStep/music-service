@@ -26,7 +26,7 @@ public class MusicAPI {
     public Track GetTrackInfo(String artist, String name) throws MalformedURLException, Exception{
         
         String artistQuery = (artist == null || artist == "")?"":"&artist=" + artist.replaceAll(" ", "%20");
-        String trackQuery = (name == null || name == "")?"":"&track=" + URLEncoder.encode(name,"UTF8");
+        String trackQuery = (name == null || name == "")?"":"&track=" + artist.replaceAll(" ", "%20");
                 
         url = "https://api.discogs.com/database/search?"
                + "type=release" 
