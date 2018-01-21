@@ -1,16 +1,18 @@
 package music_server;
 
 import Models.ArtistEvent;
-import Models.Track;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
+import com.google.gson.*;
+import com.google.gson.JsonObject;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.URL;
+import ru.blizzed.discogsdb.DiscogsAuthData;
+import ru.blizzed.discogsdb.DiscogsDBApi;
+import ru.blizzed.discogsdb.model.Page;
+import ru.blizzed.discogsdb.model.release.Release;
+import ru.blizzed.discogsdb.model.search.ReleaseSearchResult;
+import ru.blizzed.discogsdb.params.DiscogsDBParams;
 public class MusicAPI {
     
     String apiKey = "klSWCkkVXcXpbcLnaFII"; 
@@ -18,58 +20,34 @@ public class MusicAPI {
     String url;
     ArrayList<ArtistEvent> events;
     
-    JSONObject jsonObj;
+    Gson gson = new Gson();
  
-    public MusicAPI(){     
+    public MusicAPI(){    
+        DiscogsDBApi.initialize(new DiscogsAuthData("klSWCkkVXcXpbcLnaFII",
+                "btaqWtpXfdTSJfmEdIzzfiBKpQYcdemr"));
     }
-     
-    public Track GetTrackInfo(String artist, String name) throws MalformedURLException, Exception{
-        
-        String artistQuery = (artist == null || artist == "")?"":"&artist=" + artist.replaceAll(" ", "%20");
-        String trackQuery = (name == null || name == "")?"":"&track=" + artist.replaceAll(" ", "%20");
-                
-        url = "https://api.discogs.com/database/search?"
-               + "type=release" 
-               + artistQuery
-               + trackQuery
-               + "&key=" + apiKey + "&secret=" + secret;
-        url = url.replaceAll(" ", "%20");
-        
-        
-        Track track = new Track();
-        
-        //GET FIRST RAW DATA
-        jsonObj = (JSONObject)ParceUrl(url); 
     
-        JSONArray results = (JSONArray) jsonObj.get("results");
-        if(!results.isEmpty()){
-           
-            JSONObject firstResult = (JSONObject)results.get(0);
-            track.thumbUrl = (String)firstResult.get("thumb");
-            track.year = (String)firstResult.get("year");
+    public Release getRelease(String artist, String name) throws Exception{
 
-            String fullDataURL = (String)firstResult.get("resource_url");
-            fullDataURL += "?key=" + apiKey + "&secret=" + secret;
-            //GET FULL DATA
-            jsonObj = (JSONObject)ParceUrl(fullDataURL); 
-            //FULL COVER
-            results = (JSONArray) jsonObj.get("images");
-            firstResult = (JSONObject)results.get(0);    
-            track.coverUrl = (String)firstResult.get("uri");
-            
-        }
-    
-     
-        track.name = name;
-        track.artist = artist;
-        track.events = getEvents(artist);
+        Page<ReleaseSearchResult> page = DiscogsDBApi.searchRelease(
+               DiscogsDBParams.ARTIST.of(artist),
+               DiscogsDBParams.TRACK.of(name)
+        ).execute(); 
         
-        return track;   
+        if(!page.getContent().isEmpty()){
+            ReleaseSearchResult releaseSearchResult = page.getContent().get(0);
+            Long releaseId = releaseSearchResult.getId();
+            Release release = DiscogsDBApi.getRelease(releaseId).execute();
+            return release;
+        }else{
+            return null;
+        }
+          
     }
-    
+   
     public ArrayList<ArtistEvent> getEvents(String artist) throws Exception{
         
-        String artistQuery = (artist == null || artist == "")?"":URLEncoder.encode(artist,"UTF8");
+        String artistQuery = (artist == null || artist == "")?"":artist.replaceAll(" ", "%20");
         
         if(artistQuery != ""){
 
@@ -77,20 +55,23 @@ public class MusicAPI {
                    + artistQuery 
                    + "/events?app_id=rock-online";
             url = url.replaceAll(" ", "");     
-            JSONArray results = (JSONArray)ParceUrl(url); 
-
+            
+            Reader reader = new InputStreamReader(new URL(url).openStream());
+            
+         
+            JsonArray results = gson.fromJson(reader, JsonArray.class);         
             events = new ArrayList<>();
 
             try{
                 for (int i = 0; i < results.size(); i++) {
-                    JSONObject ResultRow = (JSONObject)results.get(i); 
-                    JSONObject venue = (JSONObject)ResultRow.get("venue");
+                    JsonObject ResultRow = (JsonObject)results.get(i); 
+                    JsonObject venue = (JsonObject)ResultRow.get("venue");
                     if(venue != null){
                        ArtistEvent newEvent = new ArtistEvent();
-                       newEvent.setName((String)venue.get("name"));
-                       newEvent.setCountry((String)venue.get("country"));
-                       newEvent.setCity((String)venue.get("city"));
-                       newEvent.setDatetime((String)ResultRow.get("datetime"));
+                       newEvent.setName(venue.get("name").getAsString());
+                       newEvent.setCountry(venue.get("country").getAsString());
+                       newEvent.setCity(venue.get("city").getAsString());
+                       newEvent.setDatetime(ResultRow.get("datetime").getAsString());
                        events.add(newEvent);                   
                     }   
                 }
@@ -104,26 +85,5 @@ public class MusicAPI {
           
     }
             
-    private static Object ParceUrl(String urlString) throws Exception {
-        
-        JSONParser parser = new JSONParser();
-        
-        
-        BufferedReader reader = null;
-        try {
-            URL url = new URL(urlString);
-            reader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF8"));
-            StringBuffer buffer = new StringBuffer();
-            int read;
-            char[] chars = new char[1024];
-            while ((read = reader.read(chars)) != -1)
-                buffer.append(chars, 0, read); 
-
-            return parser.parse(buffer.toString());
-        } finally {
-            if (reader != null)
-                reader.close();
-        }
-    }
 
 }
