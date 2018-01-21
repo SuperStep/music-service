@@ -15,9 +15,7 @@ public class Main {
                 @Override
                 public void run() {  
                     try {
-                        System.out.println("MS Starting...");
                         ms.Start();
-                        System.out.println("MS Finished.");
                     } catch (Exception ex) {
                         System.err.println(ex.toString());
                     }
