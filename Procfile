@@ -1,1 +1,1 @@
-worker: sh target/*.jar
+java -jar target/dependency/jetty-runner.jar target/*.jar
