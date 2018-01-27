@@ -69,11 +69,7 @@
                     <programs>
                         <program>
                             <mainClass>Main</mainClass>
-                            <name>worker</name>
-                        </program>
-                        <program>
-                            <mainClass>WorkerProcess</mainClass>
-                            <name>WorkerProcess</name>
+                            <name>Main</name>
                         </program>
                     </programs>
                   </configuration>
