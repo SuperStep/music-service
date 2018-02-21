@@ -1,1 +1,1 @@
-java -jar target/dependency/jetty-runner.jar target/*.jar
+worker: sh target/bin/MusicService
