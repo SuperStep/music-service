@@ -5,6 +5,7 @@ package music_server;
 import Models.ArtistEvent;
 import com.google.gson.Gson;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.util.ArrayList;
 import net.rubyeye.xmemcached.MemcachedClient;
 import net.rubyeye.xmemcached.MemcachedClientBuilder;
@@ -16,6 +17,7 @@ import ru.blizzed.discogsdb.model.release.Release;
 public class memcached_client {
     
     MemcachedClient client;
+    String redisLabsURL = "memcached-16414.c1.us-west-2-2.ec2.cloud.redislabs.com:16414";
     Gson gson = new Gson();
     
     public memcached_client() {
@@ -24,6 +26,9 @@ public class memcached_client {
     
     public void Connect(){
         
+        System.out.println("Connecting..."); 
+        isReachable(redisLabsURL);  
+        
         MemcachedClientBuilder builder = new XMemcachedClientBuilder(
 					AddrUtil.getAddresses("memcached-16414.c1.us-west-2-2.ec2.cloud.redislabs.com:16414"));
 	// Must use binary protocol                            
@@ -31,7 +36,7 @@ public class memcached_client {
         try {
             client = builder.build();
         } catch (IOException ex) {
-            
+            System.err.println(ex.toString());
         }       
     }
     
@@ -55,6 +60,15 @@ public class memcached_client {
         client.set("currentTrackEvents", 0, events); 
     }
 
+    public static void isReachable(String address) {
+        try {
+            InetAddress inetAddress = InetAddress.getByName(address);
+            boolean isReachable = inetAddress.isReachable(5000);
+            System.out.println("Is the address [%s] reachable? -%s\n", address, isReachable ? "Yes" : "No");
+        } catch (Exception e) {
+            System.err.println(e.toString());
+        }
+    }
 
 
 }
