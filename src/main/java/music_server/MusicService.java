@@ -12,6 +12,8 @@ public class MusicService {
     URL streamURL;
     String currentTitle;
     
+    String newTitle;
+    
     memcached_client cache = new memcached_client();
     Stream.IcyStreamMeta stream = new Stream.IcyStreamMeta();
     MusicAPI musicAPI = new MusicAPI();
@@ -24,17 +26,23 @@ public class MusicService {
         try{
             stream.setStreamUrl(new URL("http://skycast.su:2007/rock-online"));
             stream.refreshMeta();
+            newTitle = stream.getStreamTitle();
 
-            if(currentTitle != stream.getStreamTitle()){
+            System.out.println("newTitle = " + newTitle);
+            
+            if(currentTitle != newTitle){
 
                 cache.Connect();
-                currentTitle = stream.getStreamTitle();
+                System.out.println("Connected!");
+                currentTitle = newTitle;
                 ArrayList<ArtistEvent> events = musicAPI.getEvents(stream.getArtist());
                 Release release = musicAPI.getRelease(stream.getArtist(), stream.getTitle());
 
+                System.out.println("Saving...");
                 cache.SaveRelease(release);
                 cache.SaveEvents(events);
                 cache.SaveTitle(currentTitle);
+                System.out.println("Saved!");
 
                 System.out.println("Updated title: " + currentTitle);
 
