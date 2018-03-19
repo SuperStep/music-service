@@ -40,8 +40,7 @@ public class IcyStreamMeta {
     }
 
     public String getStreamTitle() throws IOException {
-        data = getMetadata();
-        System.out.println("Data = " + data.toString());        
+        data = getMetadata();   
         if (!data.containsKey("StreamTitle"))
             return "";
 
