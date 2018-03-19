@@ -28,21 +28,16 @@ public class MusicService {
             stream.refreshMeta();
             newTitle = stream.getStreamTitle();
 
-            System.out.println("newTitle = " + newTitle);
-            
             if(currentTitle != newTitle){
 
                 cache.Connect();
-                System.out.println("Connected!");
                 currentTitle = newTitle;
                 ArrayList<ArtistEvent> events = musicAPI.getEvents(stream.getArtist());
                 Release release = musicAPI.getRelease(stream.getArtist(), stream.getTitle());
 
-                System.out.println("Saving...");
                 cache.SaveRelease(release);
                 cache.SaveEvents(events);
                 cache.SaveTitle(currentTitle);
-                System.out.println("Saved!");
 
                 System.out.println("Updated title: " + currentTitle);
 
