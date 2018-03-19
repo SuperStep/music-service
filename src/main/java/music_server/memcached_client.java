@@ -30,17 +30,6 @@ public class memcached_client {
     
     public void Connect(){
         
-        System.out.println("Connecting..."); 
-        
-       
-        try {
-            inetAddress = InetAddress.getByName(redisLabsURL);
-            System.out.println("Ping = " + inetAddress.isReachable(5000)); 
-        } catch (Exception ex) {
-            System.err.println("Connecting...");
-        }
-        
-        
         MemcachedClientBuilder builder = new XMemcachedClientBuilder(
 					AddrUtil.getAddresses("memcached-16414.c1.us-west-2-2.ec2.cloud.redislabs.com:16414"));
 	// Must use binary protocol                            
