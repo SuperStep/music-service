@@ -16,7 +16,7 @@
     </repositories>
     <dependencies>
         <dependency>
-            <groupId>com.libraries</groupId>
+            <groupId>net.moralboost</groupId>
             <artifactId>streamscraper</artifactId>
             <version>1.0</version>
         </dependency>
