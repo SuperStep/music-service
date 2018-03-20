@@ -18,10 +18,12 @@
         <dependency>
             <groupId>net.moralboost</groupId>
             <artifactId>streamscraper</artifactId>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>com.jsoup</groupId>
             <artifactId>jsoup</artifactId>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>com.googlecode.xmemcached</groupId>
