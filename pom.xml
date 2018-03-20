@@ -6,7 +6,23 @@
     <artifactId>MusicService</artifactId>
     <version>0.1</version>
     <packaging>jar</packaging>
+    <repositories>
+        <!--other repositories if any-->
+        <repository>
+            <id>project.local</id>
+            <name>project</name>
+            <url>file:${project.basedir}/repo</url>
+        </repository>
+    </repositories>
     <dependencies>
+        <dependency>
+            <groupId>net.moralboost</groupId>
+            <artifactId>streamscraper</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.googlecode.xmemcached</groupId>
             <artifactId>xmemcached</artifactId>

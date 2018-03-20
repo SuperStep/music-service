@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.jsoup:jsoup:unknown">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/jsoup/jsoup/unknown/jsoup-unknown.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/jsoup/jsoup/unknown/jsoup-unknown-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/jsoup/jsoup/unknown/jsoup-unknown-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
