@@ -29,8 +29,8 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="Maven: net.moralboost:streamscraper:unknown" level="project" />
-    <orderEntry type="library" name="Maven: com.jsoup:jsoup:1.0" level="project" />
+    <orderEntry type="library" name="Maven: com.libraries:streamscraper:1.0" level="project" />
+    <orderEntry type="library" name="Maven: com.libraries:jsoup:1.7.2" level="project" />
     <orderEntry type="library" name="Maven: com.googlecode.xmemcached:xmemcached:2.4.0" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.5" level="project" />
     <orderEntry type="library" name="Maven: com.googlecode.json-simple:json-simple:1.1.1" level="project" />
