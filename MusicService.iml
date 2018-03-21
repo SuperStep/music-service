@@ -20,7 +20,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="streamscraper" level="project" />
     <orderEntry type="library" name="Maven: org.jsoup:jsoup:1.7.2" level="project" />
     <orderEntry type="library" name="Maven: com.googlecode.xmemcached:xmemcached:2.4.0" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.5" level="project" />
@@ -35,5 +34,6 @@
     <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.7" level="project" />
     <orderEntry type="library" name="Maven: javax:javaee-web-api:8.0" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-simple:1.7.5" level="project" />
+    <orderEntry type="library" name="streamscraper" level="project" />
   </component>
 </module>
