@@ -14,23 +14,14 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/repo/com/jsoup/jsoup.jar!/" />
+          <root url="jar://$MODULE_DIR$/repo/net/moralboost/streamscreaper/1.0/streamscreaper-1.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/repo/net/moralboost/streamscraper/streamscraper.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="library" name="Maven: net.moralboost:streamscraper:1.0" level="project" />
-    <orderEntry type="library" name="Maven: com.libraries:jsoup:1.7.2" level="project" />
+    <orderEntry type="library" name="streamscraper" level="project" />
+    <orderEntry type="library" name="Maven: org.jsoup:jsoup:1.7.2" level="project" />
     <orderEntry type="library" name="Maven: com.googlecode.xmemcached:xmemcached:2.4.0" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.5" level="project" />
     <orderEntry type="library" name="Maven: com.googlecode.json-simple:json-simple:1.1.1" level="project" />
