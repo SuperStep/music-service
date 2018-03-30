@@ -1,44 +1,56 @@
 package music_server;
 
 import Models.ArtistEvent;
+import com.google.gson.Gson;
+import java.net.URL;
+import java.util.ArrayList;
 import ru.blizzed.discogsdb.model.release.Release;
 
-import java.util.ArrayList;
-
 public class MusicService {
-
-    String currentTitle = "";
-    String newTitle;
+    
+    URL streamURL;
+    
+    String currentTitle;
     
     memcached_client cache = new memcached_client();
+    Stream.IcyStreamMeta stream = new Stream.IcyStreamMeta();
     MusicAPI musicAPI = new MusicAPI();
-    StreamMetadata metadata = new StreamMetadata();
-
+    
+    Release release;
+    
+    Gson gson = new Gson();
     
     public MusicService(){     
     }
+
+    public String getCurrentTitle() {
+        return currentTitle;
+    }
     
-    public void Start() {
+    public String getRelease() {
+        return gson.toJson(release);
+    }
+    
+    public void Start(){
+        try{
+            stream.setStreamUrl(new URL("http://skycast.su:2007/rock-online"));
+            stream.refreshMeta();
 
-        try {
-            newTitle = metadata.getTitle();
+            if(currentTitle != stream.getStreamTitle()){
 
-            if (currentTitle != newTitle) {
-
-                cache.Connect();
-                currentTitle = newTitle;
-                ArrayList<ArtistEvent> events = musicAPI.getEvents(metadata.getArtist());
-                Release release = musicAPI.getRelease(metadata.getArtist(), metadata.getSong());
-
-                cache.SaveRelease(release);
-                cache.SaveEvents(events);
-                cache.SaveTitle(currentTitle);
+                currentTitle = stream.getStreamTitle();
+                ArrayList<ArtistEvent> events = musicAPI.getEvents(stream.getArtist());
+                release = musicAPI.getRelease(stream.getArtist(), stream.getTitle());
 
                 System.out.println("Updated title: " + currentTitle);
-            }
 
-        } catch (Exception e) {
-            System.out.println(e.toString());
+            }else{
+                System.out.println("Title " + currentTitle + "is the same.");
+            }
+        
+        }catch(Exception ex){
+            System.err.println(ex.toString());
         }
-    }
+    } 
 }
+ 

@@ -52,6 +52,10 @@ public class memcached_client {
         client.set("current_title", 0, title);      
     } 
     
+    public String GetTitle() throws Exception{
+        return client.get("current_title");
+    } 
+    
     public void SaveRelease(Release release) throws Exception{       
         String stringRelease = gson.toJson(release); 
         client.set("current_release", 0, stringRelease);
