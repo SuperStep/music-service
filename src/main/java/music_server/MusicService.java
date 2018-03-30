@@ -12,11 +12,11 @@ public class MusicService {
     
     String currentTitle;
     
-    memcached_client cache = new memcached_client();
     IcyStreamMeta stream = new IcyStreamMeta();
     MusicAPI musicAPI = new MusicAPI();
     
     Release release;
+    ArrayList<ArtistEvent> events;
     
     Gson gson = new Gson();
     
@@ -39,9 +39,11 @@ public class MusicService {
             if(currentTitle != stream.getStreamTitle()){
 
                 currentTitle = stream.getStreamTitle();
-                ArrayList<ArtistEvent> events = musicAPI.getEvents(stream.getArtist());
+                
+                events = musicAPI.getEvents(stream.getArtist());
                 release = musicAPI.getRelease(stream.getArtist(), stream.getTitle());
 
+                
                 System.out.println("Updated title: " + currentTitle);
 
             }else{
@@ -53,4 +55,3 @@ public class MusicService {
         }
     } 
 }
- 
