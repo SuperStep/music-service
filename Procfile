@@ -1,1 +1,1 @@
-worker: java $JAVA_OPTS -jar target/MusicServiceFull.jar
+worker: java $JAVA_OPTS -jar target/MusicService-0.1.jar
