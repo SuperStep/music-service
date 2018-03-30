@@ -1,1 +1,1 @@
-worker: sh target/bin/MusicService
+worker: sh target/MusicService-0.1.jar
