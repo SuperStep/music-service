@@ -13,13 +13,6 @@
             <version>1.7.2</version>
         </dependency>
         <dependency>
-            <groupId>net.moralboost</groupId>
-            <artifactId>streamscraper</artifactId>
-            <version>1.1</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/repo/net/moralboost/streamscreaper/1.1/streamscreaper-1.1.jar</systemPath>
-        </dependency>
-        <dependency>
             <groupId>com.googlecode.xmemcached</groupId>
             <artifactId>xmemcached</artifactId>
             <version>2.4.0</version>

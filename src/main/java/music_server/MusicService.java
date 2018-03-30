@@ -13,7 +13,7 @@ public class MusicService {
     String currentTitle;
     
     memcached_client cache = new memcached_client();
-    Stream.IcyStreamMeta stream = new Stream.IcyStreamMeta();
+    IcyStreamMeta stream = new IcyStreamMeta();
     MusicAPI musicAPI = new MusicAPI();
     
     Release release;
