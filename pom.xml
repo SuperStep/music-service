@@ -84,7 +84,7 @@
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
-                    <finalName>MusicServiceFull</finalName>
+                    <finalName>MusicService-0.1</finalName>
                 </configuration>
             </plugin>
             <plugin>
