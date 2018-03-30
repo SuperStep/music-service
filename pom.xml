@@ -94,6 +94,7 @@
                  <configuration>
                 <processTypes>
                    <worker>java $JAVA_OPTS -cp target/classes:target/dependency/* Main</worker>
+                   <worker>java $JAVA_OPTS jar target/*.jar</worker>
                 </processTypes>
               </configuration>
             </plugin>
