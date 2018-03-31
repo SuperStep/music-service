@@ -1,7 +1,7 @@
 import java.io.IOException;
 import music_server.MusicService;
 
-
+import static java.lang.Integer.parseInt;
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpServer;
 import java.io.IOException;
@@ -19,7 +19,7 @@ import java.util.Map;
 public class Main {
     
     private static final String HOSTNAME = "localhost";
-    private static final int PORT = System.getenv("PORT");
+    private static final int PORT = parseInt(System.getenv("PORT"));
     private static final int BACKLOG = 1;
 
     private static final String HEADER_ALLOW = "Allow";
