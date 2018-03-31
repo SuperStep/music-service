@@ -5,7 +5,7 @@
     <groupId>com.sust</groupId>
     <artifactId>MusicService</artifactId>
     <version>0.1</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
     <dependencies>
         <dependency>
             <groupId>org.jsoup</groupId>
