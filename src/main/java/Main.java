@@ -19,7 +19,7 @@ import java.util.Map;
 public class Main {
     
     private static final String HOSTNAME = "localhost";
-    private static final int PORT = parseInt(System.getenv("PORT"));
+    private static final int PORT = 8080;
     private static final int BACKLOG = 1;
 
     private static final String HEADER_ALLOW = "Allow";
