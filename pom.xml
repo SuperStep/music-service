@@ -82,7 +82,7 @@
               <version>2.0.3</version>
                  <configuration>
                 <processTypes>
-                   <worker>java $JAVA_OPTS -cp target/classes:target/dependency/* Main</worker>
+                   <web>java $JAVA_OPTS -cp target/classes:target/dependency/* Main</web>
                 </processTypes>
               </configuration>
             </plugin>
